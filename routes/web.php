@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 'Welcome to the WalletPlus';
+    return 'Welcome to the WalletPlus. Visit /docs to read the documentation';
 });
 
 
@@ -36,6 +36,5 @@ $router->group(['prefix' => '/api/v1', 'middleware' => 'auth'], function () use 
     $router->post('/fund/{id}', 'FundController@fund');
     $router->post('/transfer/{id}','FundController@transfer');
     $router->get('/transactions/{id}', 'FundController@transactions');
-    $router->get('/balance/{id}', 'FundController@fund');
     $router->post('/spend_currency/{id}', 'FundController@spend_currency');
 });

@@ -112,4 +112,13 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+
+
+if (class_exists(\Knuckles\Scribe\ScribeServiceProvider::class)) {
+    $app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
+    $app->configure('scribe');
+}
+
+
+
 return $app;

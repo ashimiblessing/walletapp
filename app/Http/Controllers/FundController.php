@@ -15,8 +15,12 @@
        {
         $this->middleware('auth:api');
        }
-       /**
-        * Display a listing of the resource.
+
+
+
+            /**
+        * Fund a user's wallet.
+        * @bodyParam   amount string  required The amount  Example: 50
         *
         * @return \Illuminate\Http\Response
         */
@@ -78,7 +82,12 @@
 
 
 
-
+         /**
+        * Transfer between users.
+        * @bodyParam   amount string  required The amount  Example: 50
+        *
+        * @return \Illuminate\Http\Response
+        */
         public function transfer(Request $request, $id)
         {
             //The $id parameter is of the user you are transferring to
@@ -155,7 +164,12 @@
 
 
 
-
+            /**
+        * Spend money from a user's wallet.
+        * @bodyParam   amount string  required The amount.  Example: 50
+        *
+        * @return \Illuminate\Http\Response
+        */
 
 
         public function spend_currency(Request $request, $id)
@@ -225,7 +239,12 @@
 
 
 
-
+        /**
+        * Get a list of a user's transactions.
+        *
+        *
+        * @return \Illuminate\Http\Response
+        */
 
 
 

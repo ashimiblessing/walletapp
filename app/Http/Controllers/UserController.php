@@ -15,13 +15,16 @@
     {
 
        /**
-        * Display a listing of the resource.
+        * Registers a new user.
+        * @bodyParam   email    string  required    The email of the  user.      Example: testuser@example.com
+        * @bodyParam   password    string  required
+        * @bodyParam   first_name    string  required
+        * @bodyParam   last_name    string  required
+        * @bodyParam   phone   numeric  required
+        * @unauthenticated
         *
         * @return \Illuminate\Http\Response
         */
-
-
-
 
         public function register(Request $request)
         {
@@ -36,6 +39,7 @@
                 'phone' => 'required|numeric'
 
             ]);
+
 
 
 
@@ -124,7 +128,13 @@
 
 
 
-
+     /**
+        * Logs in a user and generates and returns an API key user.
+        * @bodyParam   email    string  required    The email of the  user.      Example: testuser@example.com
+        * @bodyParam   password    string  required    The password of the  user.   Example: secret
+        * @unauthenticated
+        * @return \Illuminate\Http\Response
+        */
 
 
 
