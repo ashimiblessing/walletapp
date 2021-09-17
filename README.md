@@ -1,7 +1,7 @@
 # WalletPlus API
 
  
-THank you for checking out this API. WalletPlus is a simple API for managing customer wallets
+Thank you for checking out this API. WalletPlus is a simple API for managing customer wallets
 
  
 
@@ -13,7 +13,7 @@ THank you for checking out this API. WalletPlus is a simple API for managing cus
 
 - The HASH_KEY variable is used in generating the API keys
 
-- From the project's root directory, run "php -S localhost:8000 -t public" (without the quotes)
+- From the project's root directory, run "php -S localhost:8000 -t public" (without the quotes.)
 
 ## Requirements
 
@@ -22,6 +22,7 @@ THank you for checking out this API. WalletPlus is a simple API for managing cus
     - OpenSSL PHP Extension
     - PDO PHP Extension
     - Mbstring PHP Extension
+    - Mod Rewrite
 
 
 
