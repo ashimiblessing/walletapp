@@ -43,6 +43,9 @@
                 //get current user
                 $user = User::find($id);
 
+                //attempt wallet generation if it failed for any reason
+                self::generate_wallet($user->id);
+
                 //get user's balance
                 $currency_wallet = CurrencyWallet::where('user_id', $user->id)->first();
 
@@ -99,8 +102,24 @@
 
 
             try{
-                $user = User::find($request->userid);
+                $user = User::find($request->userid); //the logged in user's id is saved as part of the request
 
+                $beneficiary = User::find($id);
+                if(empty($beneficiary))
+                {
+                    return ['status'=>'error', 'message'=>'Sorry, beneficiary not found'];
+                }
+
+
+                if($id == $user->id)
+                {
+                    return ['status'=>'error', 'message'=>'Sorry, you cannot transfer to yourself'];
+                }
+                
+                //attempt wallet generation if it fails for any reason
+
+                self::generate_wallet($user->id);
+                self::generate_wallet($id);
 
                 $donor_wallet = CurrencyWallet::where('user_id', $user->id)->first();
                 $beneficiary_wallet = CurrencyWallet::where('user_id', $id)->first();
@@ -182,9 +201,18 @@
             ]);
 
 
+
+
+
+
+
+
             try{
                 $user = User::find($request->userid);
 
+                //attempt wallet generation if it fails for any reason
+
+                self::generate_wallet($user->id);
 
                 $donor_wallet = CurrencyWallet::where('user_id', $user->id)->first();
                 $donor_balance = $donor_wallet->amount;
@@ -278,25 +306,43 @@
 
 
 
-        public function debit(Request $request)
+        public function generate_wallet($id)
         {
 
-            //check the amount user has
-            //do security checks
-            //then debit
-            //return the amount remaining
-            try{
+     
+
+                //generate user wallets if if wasn't generated for any reason
+
+                $existing_currency_wallet = CurrencyWallet::where('user_id', $id)->first();
+                $existing_points_wallet = PointsWallet::where('user_id', $id)->first();
+
+                
+                
+
+                if(empty($existing_currency_wallet))
+                {
+
+                    $currency_wallet = new CurrencyWallet;
+                    $currency_wallet->user_id = $id;
+                    $currency_wallet->amount = 0;
+                    $currency_wallet->save();
+
+                }
+
+                if(empty($existing_points_wallet))
+                {
+                    $points_wallet = new PointsWallet;
+                    $points_wallet->user_id = $id;
+                    $points_wallet->amount = 0;
+                    $points_wallet->save();
+                }
 
 
 
 
 
 
-            }
 
-            catch(\Exception $e){
-
-            }
 
         }
 

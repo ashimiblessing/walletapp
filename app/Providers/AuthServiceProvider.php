@@ -48,6 +48,17 @@ class AuthServiceProvider extends ServiceProvider
 
             $user = User::where('api_key', $key[1])->first();
             if(!empty($user)){
+            
+            
+
+            $hash_secret = env("HASH_SECRET", "C07FB8D05CF829B3E9113B4403EC9279");
+            $api_key_generated = hash_hmac('md5', $user->id,$hash_secret);
+
+            if($api_key_generated !=  $key[1])
+            {
+                return null;
+            }
+
             $request->request->add(['userid' => $user->id]);
             }
             return $user;

@@ -78,7 +78,7 @@
                 //generate user wallets
 
                 $currency_wallet = new CurrencyWallet;
-                $points_wallet = new CurrencyWallet;
+                $points_wallet = new PointsWallet;
 
                 $currency_wallet->user_id = $user->id;
                 $currency_wallet->amount = 0;
@@ -149,9 +149,11 @@
          if(Hash::check($request->input('password'), $user->password)){
               $api_key = $user->api_key;
 
+
+
               return response()->json(['status' => 'success','api_key' => $api_key]);
           }else{
-              return response()->json(['status' => 'fail'],401);
+              return response()->json(['status' => 'error','message'=> 'invalid login details'],401);
           }
        }
     }

@@ -25,6 +25,7 @@ THank you for checking out this API. WalletPlus is a simple API for managing cus
 
 
 
- 
+ ## Documentation
+After running the app, visit "your_base_url/docs" to view the API's documentation. (Eg localhost:8000/docs)
 
  
